@@ -9,11 +9,11 @@ const initialState = [{
 export default function todos(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
-      return [{
-        id: (state.length === 0) ? 0 : state[0].id + 1,
+      return [...state, {
+        id: (state.length === 0) ? 0 : state.length + 1,
         marked: false,
         text: action.text
-      }, ...state];
+      }];
     case DELETE_TODO:
       return state.filter((todo) => todo.id !== action.id);
 

@@ -4,9 +4,13 @@ class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: "haha"
+      text: "haha",
+      // todosar: {
+      //   text: 'Use Redux',
+      //   marked: false,
+      //   id: 0
+      // }
     };
-    const { addTodo } = this.props;
     this.AddChange = this.AddChange.bind(this);
     this.AddClick = this.AddClick.bind(this);
   }
@@ -18,12 +22,14 @@ class Header extends Component {
   }
 
   AddClick(e) {
-    this.addTodo.push(this.state.text);
+    this.props.addTodo(this.state.text);
     this.setState({text: ''});
     e.preventDefault();
   }
 
   render() {
+    const { todos, addTodo } = this.props;
+    console.log('todos1', todos);
     return (
       <header className="App-header">
         <h1>add</h1>
