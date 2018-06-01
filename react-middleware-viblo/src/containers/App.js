@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchData } from './action';
+import { fetchData } from '../actions/actions';
 
 let styles
 
 const App = (props) => {
   const {container, text, button, buttonText} = styles
-
+ console.log('appData', props.appData)
   return (
     <div style={container}>
       <div style={text}>name 007</div>
-      <div style={button}>
-        <div style={buttonText}>Load data</div>
+      <div style={button} onClick={() => props.fetchData()} >
+        <div style={buttonText}>
+          {
+            props.appData.isFetching && <div>Loading</div>
+          }
+          {
+            props.appData.data.length ? (
+              props.appData.data.map((person, i) => {
+                return <div key={1}>
+                  <div>Name: {person.name}</div>
+                  <div>Age: {person.age}</div>
+                </div>
+              })
+            ) : null
+          }
+        </div>
       </div>
     </div>
   );
